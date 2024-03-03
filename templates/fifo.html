@@ -6,6 +6,19 @@
     <title>FIFO</title>
 </head>
 <body>
-    
+    <form method="post">
+        <p> Total Number of Processes <input name="n" type="number" value="{{n}}" min="0"> </p>
+        <button type="submit"> SUBMIT </button>
+    </form>
+    {% if n  %}
+    <form method="post">
+        {% for i in range(n) %}
+
+        <p> P{{i+1}}<input type="number" name="{{i}}" ></p>
+        {% endfor %}
+    </form>
+    {% endif %}
+
+
 </body>
 </html>

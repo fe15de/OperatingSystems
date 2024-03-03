@@ -10,7 +10,12 @@ def home():
 
 @app.route("/fifo",methods = ['POST', 'GET'])
 def fifo():
-    return render_template("fifo.html") 
+    if request.method == 'GET':
+        n = 0
+    if request.method == 'POST':
+        n = int(request.form['n'])
+
+    return render_template("fifo.html", n = n) 
 
 @app.route("/sjf",methods = ['POST', 'GET'])
 def sjf():
