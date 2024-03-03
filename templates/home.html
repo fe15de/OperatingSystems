@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms</title>
+    <link rel="stylesheet" href="/stylee/main.css">
+</head>
+<body>
+    <h1> CPU Algorithms </h1>
+
+    <form  action="{{ url_for('fifo') }}">
+        <button type="submit" > FIFO </button>
+    </form>
+    <form  action="{{ url_for('sjf') }}">
+        <button type="submit" > SJF </button>
+    </form>
+    <form  action="{{ url_for('priority') }}">
+        <button type="submit" > PRIORITY </button>
+    </form>
+    <form  action="{{ url_for('roundRobin') }}">
+        <button type="submit" > ROUND ROBIN </button>
+    </form>
+    
+    
+</body>
+</html>
