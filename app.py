@@ -1,5 +1,3 @@
-from quickchart import QuickChart
-
 from flask import Flask , render_template, request
 
 app = Flask(__name__)
@@ -12,13 +10,13 @@ def home():
 def fifo():
     if request.method == 'GET':
         n = 0
+        table = False # flag to print table in html
     if request.method == 'POST':
         n = int(request.form['n'])
         print(request.form)
         if n != 0:
             data = request.form
             last_data = list(data.items())[-1]
-            print(last_data)
             if last_data[0] == 'start':
                 arrival_time = [] * n
                 burst_time = [] * n
@@ -49,20 +47,9 @@ def fifo():
                     else:
                         CPU += 1  # If no process is eligible to run, just increment CPU time
 
-                print("\nProcess_Number\tBurst_Time\tArrival_Time\tWaiting_Time\tTurnaround_Time\n")
-                for i in range(n):
-                    print("P{}\t\t{}\t\t{}\t\t{}\t\t{}".format(i + 1, burst_time[i], arrival_time[i], waiting_time[i], turnaround_time[i]))
-
-                AvgWT = sum(waiting_time) / n  # Average waiting time
-                AVGTaT = sum(turnaround_time) / n  # Average Turnaround time
-
-                print("Average waiting time =", AvgWT)
-                print("Average turnaround time =", AVGTaT)
-            
-                            
-                            
-
-    return render_template("fifo.html", n = n) 
+                return render_template("fifo.html", n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,                  AVGTaT = sum(turnaround_time) / n, table = True)
+                                                
+    return render_template("fifo.html", n = n, table = False) 
 
 @app.route("/sjf",methods = ['POST', 'GET'])
 def sjf():
