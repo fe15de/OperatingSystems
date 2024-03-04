@@ -8,17 +8,19 @@
 <body>
     <form method="post">
         <p> Total Number of Processes <input name="n" type="number" value="{{n}}" min="0"> </p>
-        <button type="submit"> SUBMIT </button>
-    </form>
+        <button type="submit" > SUBMIT </button>
+    
     {% if n  %}
-    <form method="post">
+    
         {% for i in range(n) %}
 
-        <p> P{{i+1}}<input type="number" name="{{i}}" ></p>
+        <p> P{{i+1}} Arrival Time <input type="number" name="at{{i}}"></p>
+        <p> P{{i+1}}  Burst Time <input type="number" name="bt{{i}}"></p>
         {% endfor %}
-    </form>
+        <button type="submit" name="start"> SUBMIT </button>
+    
     {% endif %}
-
+    </form>
 
 </body>
 </html>
