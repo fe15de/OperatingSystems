@@ -185,6 +185,8 @@ def roundRobin():
                             remaining_burst_time[i] -= execute_time
                             turnaround_time[i] += CPU - arrival_time[i]
                             arrival_time[i] = CPU
+                        else:
+                            CPU += 1
 
                 return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
     return render_template("program.html", time_quantum = time_quantum ,n = n, table = False,name = 'ROUND ROBIN')
