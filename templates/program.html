@@ -19,8 +19,11 @@
     
         {% for i in range(n) %}
         <div style="display: flex; justify-content: center;">
-            <p> P{{i+1}} Arrival Time <input type="number" name="at{{i}}"></p>
-            <p> P{{i+1}}  Burst Time <input type="number" name="bt{{i}}"></p>
+            <p> P{{i+1}} Arrival Time <input type="number" min="0" name="at{{i}}"></p>
+            <p> P{{i+1}}  Burst Time <input type="number" min="1" name="bt{{i}}"></p>
+            {% if name == 'PRIORITY'  %}
+            <p> P{{i+1}}  Priority <input type="number" min="0" name="priority{{i}}"></p>
+            {% endif %}
         </div>
         {% endfor %}
         <button type="submit" id="start" name="start"> SUBMIT </button>
@@ -35,6 +38,9 @@
                 <th>Process Number</th>
                 <th>Burst Time</th>
                 <th>Arrival Time</th>
+                {% if name == 'PRIORITY'  %}
+                <th>Priority</th>
+                {% endif %}
                 <th>Waiting Time</th>
                 <th>Turnaround Time</th>
             </tr>
@@ -45,6 +51,9 @@
                 <td>{{ i+1 }}</td>
                 <td>{{ bt[i] }}</td>
                 <td>{{ at[i] }}</td>
+                {% if name == 'PRIORITY'  %}
+                <td>{{ prio[i] }}</td>
+                {% endif %}
                 <td>{{ wt[i] }}</td>
                 <td>{{ tat[i] }}</td>
             </tr>
