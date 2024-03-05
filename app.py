@@ -154,8 +154,40 @@ def priority():
 
 @app.route("/roundRobin",methods = ['POST', 'GET'])
 def roundRobin():
-    return render_template("roundRobin.html") 
+    if request.method == 'GET':
+        n = 0
+        time_quantum = 0
+    if request.method == 'POST':
+        print(request.form)
+        n = int(request.form['n'])
+        time_quantum = int(request.form['tq'])
+        if n != 0:
+            data = request.form
+            last_data = list(data.items())[-1]
+            if last_data[0] == 'start':
+                arrival_time = [] * n
+                burst_time = [] * n
+                for i in range(n):
+                    arrival_time.append(int(request.form.get('at' + str(i))))
+                    burst_time.append(int(request.form.get('bt' + str(i))))
+                CPU = 0
+                waiting_time = [0] * n
+                turnaround_time = [0] * n
+                remaining_burst_time = burst_time.copy()
 
+                while any(remaining_burst_time):
+                    for i in range(n):
+                        if remaining_burst_time[i] > 0:
+                            execute_time = min(time_quantum, remaining_burst_time[i])
+                            print(f"At CPU time {CPU}: Process P{i + 1} is running")
+                            waiting_time[i] += CPU - arrival_time[i]
+                            CPU += execute_time
+                            remaining_burst_time[i] -= execute_time
+                            turnaround_time[i] += CPU - arrival_time[i]
+                            arrival_time[i] = CPU
+
+                return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
+    return render_template("program.html", time_quantum = time_quantum ,n = n, table = False,name = 'ROUND ROBIN')
 
 if __name__ == "__main__":
     app.run(debug=True)

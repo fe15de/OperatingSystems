@@ -13,6 +13,9 @@
     <h1 style="text-align: center; font-weight: bolder;"> {{name}} </h1>
     <form method="post">
         <p> Total Number of Processes <input name="n" type="number" value="{{n}}" min="0"> </p>
+        {% if name == 'ROUND ROBIN'  %}
+            <p> Time Quantum <input type="number" min="1" name="tq" value="{{time_quantum}}"></p>
+        {% endif %}
         <button type="submit" > SUBMIT </button>
     
     {% if n  %}
