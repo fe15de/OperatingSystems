@@ -45,9 +45,9 @@ def fifo():
                     else:
                         CPU += 1  # If no process is eligible to run, just increment CPU time
 
-                return render_template("fifo.html", n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,                  AVGTaT = sum(turnaround_time) / n, table = True)
+                return render_template("program.html", n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,                AVGTaT = sum(turnaround_time) / n, table = True, name = 'FIFO')
                                                 
-    return render_template("fifo.html", n = n, table = False) 
+    return render_template("program.html", n = n, table = False, name = 'FIFO') 
 
 @app.route("/sjf",methods = ['POST', 'GET'])
 def sjf():
@@ -93,8 +93,8 @@ def sjf():
                         processed[min_index] = True
                         NoP -= 1
 
-                return render_template("sjf.html", n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,                  AVGTaT = sum(turnaround_time) / n, table = True)
-    return render_template("sjf.html", n = n, table = False) 
+                return render_template("program.html", n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,                AVGTaT = sum(turnaround_time) / n, table = True, name = 'SFJ')
+    return render_template("program.html", n = n, table = False,name = 'SFJ') 
 
 @app.route("/priority",methods = ['POST', 'GET'])
 def priority():

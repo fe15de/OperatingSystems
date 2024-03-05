@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIFO</title>
+    <title>{{name}}</title>
     <link rel="stylesheet" href="/static/fifo.css">
 </head>
 <body>
     <form  action="{{ url_for('home') }}">
         <button type="submit" > HOME </button>
     </form>
-    <h1 style="text-align: center; font-weight: bolder;"> FIFO </h1>
+    <h1 style="text-align: center; font-weight: bolder;"> {{name}} </h1>
     <form method="post">
         <p> Total Number of Processes <input name="n" type="number" value="{{n}}" min="0"> </p>
         <button type="submit" > SUBMIT </button>
