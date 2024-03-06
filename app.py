@@ -177,7 +177,8 @@ def roundRobin():
 
                 while any(remaining_burst_time):
                     for i in range(n):
-                        if remaining_burst_time[i] > 0:
+                        found_index = False
+                        if remaining_burst_time[i] > 0 and arrival_time[i] <= CPU:
                             execute_time = min(time_quantum, remaining_burst_time[i])
                             print(f"At CPU time {CPU}: Process P{i + 1} is running")
                             waiting_time[i] += CPU - arrival_time[i]
@@ -185,8 +186,10 @@ def roundRobin():
                             remaining_burst_time[i] -= execute_time
                             turnaround_time[i] += CPU - arrival_time[i]
                             arrival_time[i] = CPU
-                        else:
+                            found_index =  True
+                        if not found_index:
                             CPU += 1
+                        
 
                 return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
     return render_template("program.html", time_quantum = time_quantum ,n = n, table = False,name = 'ROUND ROBIN')
