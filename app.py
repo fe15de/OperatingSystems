@@ -174,6 +174,7 @@ def roundRobin():
                 waiting_time = [0] * n
                 turnaround_time = [0] * n
                 remaining_burst_time = burst_time.copy()
+                arrival_time_aux = arrival_time.copy()
 
                 while any(remaining_burst_time):
                     for i in range(n):
@@ -191,7 +192,7 @@ def roundRobin():
                             CPU += 1
                         
 
-                return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
+                return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time_aux, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
     return render_template("program.html", time_quantum = time_quantum ,n = n, table = False,name = 'ROUND ROBIN')
 
 if __name__ == "__main__":
