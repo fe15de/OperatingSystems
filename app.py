@@ -175,22 +175,36 @@ def roundRobin():
                 turnaround_time = [0] * n
                 remaining_burst_time = burst_time.copy()
                 arrival_time_aux = arrival_time.copy()
+                nAux = n
+                processed = [False] * n
+                NoP = n
 
                 while any(remaining_burst_time):
-                    found_index = False
+                    
+                    if NoP == 0:
+                        processed = [False]* n
+                        NoP = nAux
+                    min_arrival = float('inf')
+                    index = -1
                     for i in range(n):
-                        if remaining_burst_time[i] > 0 and arrival_time_aux[i] <= CPU:
-                            execute_time = min(time_quantum, remaining_burst_time[i])
-                            print(f"At CPU time {CPU}: Process P{i + 1} is running")
-                            waiting_time[i] += CPU - arrival_time[i]
-                            CPU += execute_time
-                            remaining_burst_time[i] -= execute_time
-                            turnaround_time[i] += CPU - arrival_time[i]
-                            arrival_time[i] = CPU
-                            found_index =  True
+                        if remaining_burst_time[i] > 0 and arrival_time_aux[i] <= CPU and not processed[i] and arrival_time_aux[i] < min_arrival:
+                            min_arrival = arrival_time_aux[i]
+                            index = i 
                             
-                    if not found_index:
+                    if index == -1:
                         CPU += 1
+                    else:
+                        print(f"At CPU time {CPU}: Process P{index + 1} is running") 
+                        execute_time = min(time_quantum, remaining_burst_time[index])           
+                        waiting_time[index] += CPU - arrival_time[index]
+                        CPU += execute_time
+                        remaining_burst_time[index] -= execute_time
+                        turnaround_time[index] += CPU - arrival_time[index]
+                        arrival_time[index] = CPU
+                        NoP -= 1
+                        processed[index] = True
+                        if remaining_burst_time[index] == 0:
+                            nAux -= 1 
                         
 
                 return render_template("program.html",time_quantum=time_quantum, prio = priority ,n = n,bt = burst_time, at= arrival_time_aux, wt = waiting_time, tat = turnaround_time,AvgWT = sum(waiting_time) /n ,AVGTaT = sum(turnaround_time) / n, table = True, name = 'ROUND ROBIN')
