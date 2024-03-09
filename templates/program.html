@@ -3,71 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{name}}</title>
+    <title>{{ name }}</title>
     <link rel="stylesheet" href="/static/fifo.css">
+    <link  rel="icon" href="/static/GHGZ2_xXsAA3SFR.jpeg">
 </head>
 <body>
-    <form  action="{{ url_for('home') }}">
-        <button type="submit" > HOME </button>
+    <form action="{{ url_for('home') }}">
+        <button type="submit"> HOME </button>
     </form>
-    <h1 style="text-align: center; font-weight: bolder;"> {{name}} </h1>
+    <h1 style="text-align: center; font-weight: bolder;"> {{ name }} </h1>
     <form method="post">
-        <p> Total Number of Processes <input name="n" type="number" value="{{n}}" min="0"> </p>
+        <p> Total Number of Processes <input name="n" type="number" value="{{ n }}" min="0"> </p>
         {% if name == 'ROUND ROBIN'  %}
             <p> Time Quantum <input type="number" min="1" name="tq" value="{{time_quantum}}"></p>
         {% endif %}
-        <button type="submit" > SUBMIT </button>
+        <button type="submit"> SUBMIT </button>
     
-    {% if n  %}
-    
-        {% for i in range(n) %}
-        <div style="display: flex; justify-content: center;">
-            <p> P{{i+1}} Arrival Time <input type="number" min="0" name="at{{i}}"></p>
-            <p> P{{i+1}}  Burst Time <input type="number" min="1" name="bt{{i}}"></p>
-            {% if name == 'PRIORITY'  %}
-            <p> P{{i+1}}  Priority <input type="number" min="0" name="priority{{i}}"></p>
-            {% endif %}
-        </div>
-        {% endfor %}
-        <button type="submit" id="start" name="start"> SUBMIT </button>
-    
-    {% endif %}
+        {% if n %}
+            {% for i in range(n) %}
+                <div style="display: flex; justify-content: center;">
+                    <p> P{{ i+1 }} Arrival Time <input type="number" min="0" name="at{{ i }}"></p>
+                    <p> P{{ i+1 }} Burst Time <input type="number" min="1" name="bt{{ i }}"></p>
+                    {% if name == 'PRIORITY'  %}
+                    <p> P{{i+1}}  Priority <input type="number" min="0" name="priority{{i}}"></p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" id="start" name="start"> SUBMIT </button>
+        {% endif %}
     </form>
 
     {% if table %}
-    <table >
-        <thead>
-            <tr>
-                <th>Process Number</th>
-                <th>Burst Time</th>
-                <th>Arrival Time</th>
-                {% if name == 'PRIORITY'  %}
-                <th>Priority</th>
-                {% endif %}
-                <th>Waiting Time</th>
-                <th>Turnaround Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in range(n) %}
-            <tr>
-                <td>{{ i+1 }}</td>
-                <td>{{ bt[i] }}</td>
-                <td>{{ at[i] }}</td>
-                {% if name == 'PRIORITY'  %}
-                <td>{{ prio[i] }}</td>
-                {% endif %}
-                <td>{{ wt[i] }}</td>
-                <td>{{ tat[i] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <div style="justify-content: center;">
-        <p> Average Waiting Time: {{AvgWT}} </p>
-        <p> Average Turnaround Time: {{AVGTaT}} </p>
-    </div>
-    {% endif%}
+        <table>
+            <thead>
+                <tr>
+                    <th>Process Number</th>
+                    <th>Burst Time</th>
+                    <th>Arrival Time</th>
+                    {% if name == 'PRIORITY'  %}
+                    <th>Priority</th>
+                    {% endif %}
+                    <th>Waiting Time</th>
+                    <th>Turnaround Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(n) %}
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ bt[i] }}</td>
+                        <td>{{ at[i] }}</td>
+                        {% if name == 'PRIORITY'  %}
+                        <td>{{ prio[i] }}</td>
+                        {% endif %}
+                        <td>{{ wt[i] }}</td>
+                        <td>{{ tat[i] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div style="justify-content: center;">
+            <p> Average Waiting Time: {{ AvgWT }} </p>
+            <p> Average Turnaround Time: {{ AVGTaT }} </p>
+        </div>
+    {% endif %}
+
+    {% if graph %}
+        <img src="data:image/png;base64,{{ graph }}" alt="Graph">
+    {% endif %}
 
 </body>
 </html>
