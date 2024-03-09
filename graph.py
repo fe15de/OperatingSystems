@@ -40,7 +40,7 @@ def graph(name,start_time,end_time,n):
     plt.legend()
 
     # Save the FIFO graph
-    plt.savefig('static/fifo_graph.png', facecolor=(0.18, 0.18, 0.18))
+    plt.savefig('static/graph.png', facecolor=(0.18, 0.18, 0.18))
     plt.close()
 
     # Convert the image to base64
@@ -78,7 +78,7 @@ def graphRound(name ,execution_sequence,n):
                 plt.legend()
 
                 # Save the Round Robin graph
-                plt.savefig('static/roundrobin_graph.png', facecolor=(0.18, 0.18, 0.18))
+                plt.savefig('static/graph.png', facecolor=(0.18, 0.18, 0.18))
                 plt.close()
 
                 # Convert the image to base64
