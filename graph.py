@@ -39,12 +39,11 @@ def graph(name,start_time,end_time,n):
     plt.yticks(range(n), [f'Process {i + 1}' for i in range(n)])
     plt.legend()
 
-    # Save the FIFO graph
     plt.savefig('static/graph.png', facecolor=(0.18, 0.18, 0.18))
     plt.close()
 
     # Convert the image to base64
-    with open('static/fifo_graph.png', 'rb') as f:
+    with open('static/graph.png', 'rb') as f:
         graph_bytes = f.read()
         return base64.b64encode(graph_bytes).decode('utf-8')
     
@@ -77,11 +76,10 @@ def graphRound(name ,execution_sequence,n):
                 plt.yticks(range(n), [f'Process {process + 1}' for process in range(n)])
                 plt.legend()
 
-                # Save the Round Robin graph
                 plt.savefig('static/graph.png', facecolor=(0.18, 0.18, 0.18))
                 plt.close()
 
                 # Convert the image to base64
-                with open('static/roundrobin_graph.png', 'rb') as f:
+                with open('static/graph.png', 'rb') as f:
                     graph_bytes = f.read()
                     return base64.b64encode(graph_bytes).decode('utf-8')
