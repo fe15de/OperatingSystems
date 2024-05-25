@@ -26,6 +26,19 @@ To run this application locally, follow these steps:
    ```sh
    git clone https://github.com/yourusername/scheduling-algorithms-simulation.git
    cd scheduling-algorithms-simulation
+2. **Create a virtual environment and activate it:**
+   ``` sh 
+   python -m venv venv
+   source venv/bin/activate   # On Windows, use `venv\Scripts\activate`
+
+3. **Install the dependencies:**
+   ```
+   pip install flask
+
+4. **Run the application:**
+   ```
+   python app.py
+
 
 ## Usage
 
