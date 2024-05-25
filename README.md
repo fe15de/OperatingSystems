@@ -14,7 +14,7 @@ This Flask application simulates various CPU scheduling algorithms including FIF
 
 - **FIFO (First In First Out) Scheduling**: Processes are scheduled in the order they arrive.
 - **SJF (Shortest Job First) Scheduling**: Processes with the shortest burst time are scheduled first.
-- **Priority Scheduling**: Processes with the highest priority are scheduled first.
+- **Priority Scheduling**: Processes with the lowest priority are scheduled first.
 - **Round Robin Scheduling**: Processes are scheduled in a cyclic order with a fixed time quantum.
 
 ## Installation
